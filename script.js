@@ -60,15 +60,19 @@ function renderCart() {
 
 // -------------------------------
 // Add item to cart
-// -------------------------------
 function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
   const cart = getCart();
 
-  cart.push(product); // Add product
-  saveCart(cart);     // Save updated cart
+  // Push a clean copy so sessionStorage stores real values
+  cart.push({
+    id: product.id,
+    name: product.name,
+    price: product.price
+  });
 
-  renderCart();       // Update UI
+  saveCart(cart);
+  renderCart();
 }
 
 // -------------------------------
